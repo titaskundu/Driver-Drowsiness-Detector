@@ -3,6 +3,8 @@ import cv2
 import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
 from cvzone.PlotModule import LivePlot
+import simpleaudio as sa
+
 
 cap = cv2.VideoCapture(0)
 detector = FaceMeshDetector(maxFaces=1)
@@ -23,6 +25,11 @@ def generate_frames():
     ratioList = []
     blinkCounter = 0
     counter = 0
+    sound_path = "assets/beep-07a.wav"
+    def play_sound(sound_path):
+        wave_obj = sa.WaveObject.from_wave_file(sound_path)
+        play_obj = wave_obj.play()
+        play_obj.wait_done()
     while True:
             
         ## read the camera frame
@@ -65,8 +72,10 @@ def generate_frames():
                     blinkCounter += 1
                     color = (0,200,0)
                     if blinkCounter>60:
-                        cvzone.putTextRect(img, f'Sleeping', (50, 100),
+                        cvzone.putTextRect(img, f'Sleeping!!', (50, 100),
                                         colorR=color)
+                        play_sound(sound_path)
+
 
 
 
