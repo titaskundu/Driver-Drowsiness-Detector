@@ -6,7 +6,7 @@ from cvzone.PlotModule import LivePlot
 import simpleaudio as sa
 
 
-cap = cv2.VideoCapture(0, cv2.CAP_FFMPEG)
+cap = cv2.VideoCapture(0)
 detector = FaceMeshDetector(maxFaces=1)
 color = (255, 0, 255)
 plotY = LivePlot(640, 360, [20, 50], invert=True)
